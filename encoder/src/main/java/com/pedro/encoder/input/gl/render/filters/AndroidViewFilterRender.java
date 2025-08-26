@@ -290,13 +290,15 @@ public class AndroidViewFilterRender extends BaseFilterRender {
                         } catch (Exception e) {
                             e.printStackTrace();
                             mainHandler.post(() -> {
-                                view.draw(canvas);
-                                if (status == Status.RENDER1) {
-                                    surface.unlockCanvasAndPost(canvas);
-                                    renderingStatus = Status.DONE1;
-                                } else {
-                                    surface2.unlockCanvasAndPost(canvas);
-                                    renderingStatus = Status.DONE2;
+                                if (view != null) {
+                                    view.draw(canvas);
+                                    if (status == Status.RENDER1) {
+                                        surface.unlockCanvasAndPost(canvas);
+                                        renderingStatus = Status.DONE1;
+                                    } else {
+                                        surface2.unlockCanvasAndPost(canvas);
+                                        renderingStatus = Status.DONE2;
+                                    }
                                 }
                             });
                         }
