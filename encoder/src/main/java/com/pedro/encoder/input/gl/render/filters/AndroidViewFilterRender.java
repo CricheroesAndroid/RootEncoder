@@ -288,7 +288,8 @@ public class AndroidViewFilterRender extends BaseFilterRender {
                             }
                             //Sometimes draw could crash if you don't use main thread. Ensuring you can render always
                         } catch (Exception e) {
-                            mainHandler.postDelayed(() -> {
+                            e.printStackTrace();
+                            mainHandler.post(() -> {
                                 view.draw(canvas);
                                 if (status == Status.RENDER1) {
                                     surface.unlockCanvasAndPost(canvas);
@@ -297,7 +298,7 @@ public class AndroidViewFilterRender extends BaseFilterRender {
                                     surface2.unlockCanvasAndPost(canvas);
                                     renderingStatus = Status.DONE2;
                                 }
-                            },500);
+                            });
                         }
                     }
                 } else {
